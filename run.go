@@ -1,25 +1,28 @@
 package main
 
 import (
-	"flowy/flowy"
-	"github.com/dgraph-io/badger/v3"
 	"log"
+
+	"flowy/flowy"
 )
 
+const DbStoragePath = "./storage.db"
+
 func main() {
-	storage := flowy.NewStorage("./storage.db")
-	defer func(Db *badger.DB) {
-		err := Db.Close()
+	storage, err := flowy.NewStorage(DbStoragePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	app := flowy.NewApplication(storage)
+	defer func(app *flowy.Application) {
+		err := app.Close()
 		if err != nil {
 			log.Fatal(err)
 		}
-	}(storage.Db)
+	}(app)
 
-	app := &flowy.Application{
-		Storage: storage,
-	}
-
-	err := app.Run()
+	err = app.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
