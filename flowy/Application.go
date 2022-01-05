@@ -2,17 +2,19 @@ package flowy
 
 import (
 	"log"
-	"sync"
 )
 import "github.com/robfig/cron/v3"
 
 type Application struct {
+	api       *Api
 	storage   *Storage
 	tickCount int64
 }
 
 func NewApplication(storage *Storage) *Application {
-	return &Application{storage: storage, tickCount: 0}
+	api := NewApi(storage)
+
+	return &Application{api: api, storage: storage, tickCount: 0}
 }
 
 func (a *Application) Run() error {
@@ -23,6 +25,8 @@ func (a *Application) Run() error {
 	if err != nil {
 		return err
 	}
+
+	a.api.Listen()
 
 	return nil
 }
@@ -46,12 +50,6 @@ func (a *Application) schedule() error {
 	}
 
 	c.Start()
-
-	// forever https://pliutau.com/different-ways-to-block-go-runtime-forever/
-	// TODO replace by http server
-	var wg sync.WaitGroup
-	wg.Add(1)
-	wg.Wait()
 
 	return nil
 }
