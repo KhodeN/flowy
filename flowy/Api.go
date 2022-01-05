@@ -20,6 +20,7 @@ func NewApi(storage *Storage) *Api {
 	api := &Api{app: app, storage: storage}
 
 	app.Get("/", api.rootHandler)
+	app.Get("/api", api.apiRootHandler)
 
 	return api
 }
@@ -29,5 +30,9 @@ func (a *Api) Listen() {
 }
 
 func (a *Api) rootHandler(ctx *neo.Ctx) (int, error) {
+	return 301, ctx.Res.Redirect("/api")
+}
+
+func (a *Api) apiRootHandler(ctx *neo.Ctx) (int, error) {
 	return 200, ctx.Res.Json("Hello from API")
 }

@@ -3,7 +3,7 @@ export class Api {
     }
 
     public async getRoot(): Promise<string> {
-        const resp = await fetch(`${this.apiUrl}/`, {
+        const resp = await fetch(`${this.apiUrl}`, {
             method: 'GET'
         });
 
