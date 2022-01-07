@@ -1,0 +1,90 @@
+root: true
+
+extends:
+   - airbnb
+   - prettier
+   - plugin:react-hooks/recommended
+   - plugin:prettier/recommended
+#   - plugin:storybook/recommended
+
+plugins:
+   - prettier
+
+rules:
+   camelcase: 'off'
+   class-methods-use-this: 'off'
+   import/extensions: 'off'
+   import/no-extraneous-dependencies: 'off'
+   import/no-unresolved: 'off'
+   import/prefer-default-export: 'off'
+   jsx-a11y/click-events-have-key-events: 'off'
+   jsx-a11y/label-has-associated-control: 'off'
+   no-console: 'off'
+   no-continue: 'off'
+   no-debugger: warn
+   no-empty-function: 'off'
+   no-nested-ternary: 'off'
+   no-param-reassign: 'off'
+   no-prototype-builtins: 'off'
+   no-restricted-syntax: 'off'
+   no-undef-init: 'off'
+   no-useless-constructor: 'off'
+   prettier/prettier: warn
+   react/destructuring-assignment: 'off'
+   react/function-component-definition: 'off'
+   react/jsx-boolean-value: [warn, always]
+   react/jsx-curly-brace-presence:
+      - error
+      - props: always
+        children: ignore
+   react/jsx-curly-newline: 'off'
+   react/jsx-filename-extension: 'off'
+   react/jsx-indent-props: 'off'
+   react/jsx-indent: 'off'
+   react/jsx-one-expression-per-line: 'off'
+   react/jsx-props-no-spreading: 'off'
+   react/jsx-wrap-multilines: 'off'
+   react/no-did-update-set-state: 'off'
+   react/no-unescaped-entities: 'off'
+   react/no-unstable-nested-components: 'off'
+   react/prop-types: 'off'
+   react/state-in-constructor: 'off'
+   react/react-in-jsx-scope: 'off' # not actual in new React
+   react/jsx-no-useless-fragment: 'off'
+   react-hooks/exhaustive-deps: 'error'
+   import/order:
+      - warn
+      - newlines-between: 'always'
+
+overrides:
+   - files:
+        - '**/*.ts?(x)'
+     plugins:
+        - '@typescript-eslint'
+     parser: '@typescript-eslint/parser'
+     extends:
+        - 'plugin:@typescript-eslint/recommended'
+     rules:
+        '@typescript-eslint/ban-ts-comment': 'off'
+        '@typescript-eslint/ban-types': 'off'
+        '@typescript-eslint/explicit-function-return-type': 'off'
+        '@typescript-eslint/explicit-module-boundary-types': 'off'
+        '@typescript-eslint/no-empty-function': 'off'
+        '@typescript-eslint/no-empty-interface': 'off'
+        '@typescript-eslint/no-explicit-any': 'off'
+        '@typescript-eslint/no-non-null-assertion': 'off'
+        '@typescript-eslint/no-shadow': error
+        '@typescript-eslint/no-unused-expressions': 'off'
+        '@typescript-eslint/triple-slash-reference': 'off'
+        no-shadow: 'off' # replaced by '@typescript-eslint/no-shadow' rule
+        react/no-unused-prop-types: 'off'
+        react/require-default-props: 'off'
+        react/sort-comp: 'off'
+
+   - files:
+        - src/**/*.stories.js
+        - src/**/*.stories.tsx
+        - src/**/*.test.js?(x)
+        - src/**/*.test.ts?(x)
+     rules:
+        import/no-extraneous-dependencies: 'off'

@@ -1,3 +1,11 @@
-import {Api} from "./Api";
+import { API_URL } from '../models/constants';
 
-export const api = new Api('/api')
+import { Api } from './Api';
+
+export type { Api } from './Api';
+
+const api = new Api(API_URL);
+
+export function useApi() {
+   return api;
+}
