@@ -38,13 +38,13 @@ func (a *Application) Close() error {
 func (a *Application) schedule() error {
 	c := cron.New()
 
-	_, err := c.AddFunc("@every 1s", a.tick)
+	_, err := c.AddFunc("@every 1m", a.tick)
 	if err != nil {
 		return err
 	}
 
 	// TODO do configurable
-	_, err = c.AddFunc("@every 1m", a.sync)
+	_, err = c.AddFunc("@every 1h", a.sync)
 	if err != nil {
 		return err
 	}
